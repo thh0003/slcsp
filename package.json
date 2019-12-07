@@ -1,0 +1,22 @@
+{
+  "name": "slcsp",
+  "version": "1.0.0",
+  "description": "Calculate the second lowest cost silver plan",
+  "main": "slcsp.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "dotenv": "8.2.0"
+  },
+  "devDependencies": {
+    "chai": "4.2.0",
+    "chai-as-promised": "7.1.1",
+    "mocha": "6.2.2"
+  },
+  "scripts": {
+    "test": "mocha 'test/**Spec.js'"
+  },
+  "author": "",
+  "license": "ISC"
+}
