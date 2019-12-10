@@ -8,17 +8,30 @@ Utilizes the SlcspParser Class to get the SLCSP rate
 */
 const main = async () => {
     try{
-        const protoparser = new protoP(process.env.DATAFILE);
-        let header;
-        let data;
-        let load = await protoparser.loadFile();
+        const slcspparser = new slcspP(
+            {
+                fp : process.env.PLANS,
+                cols : process.env.PLANSCOLS
+            },
+            {
+                fp : process.env.ZIPS,
+                cols : process.env.ZIPSCOLS
+            },
+            {
+                fp : process.env.SLCSP,
+                cols : process.env.SLCSPCOLS
+            }
+        );
+        let load = await slcspparser.loadSLCPCSV();
         if (load){
-            header = await protoparser.parseHeader();
-            if (header){
-                data = await protoparser.parseData();
-                if (data){
-                    protoparser.displayTotals();
-                }
+            //Filter the plans to leave only the Silver Plans
+            let filterSLCSP = slcspparser.filterPlans('Silver',60);
+            if (filterSLCSP){
+                console.log
+            }
+            let filterZIP = slcspparser.filterZipCodes('61614');
+            if (filterZIP){
+                console.log
             }
         }
     } catch(error){
