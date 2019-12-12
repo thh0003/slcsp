@@ -2,55 +2,31 @@
 
 ## Calculate the second lowest cost silver plan
 
-## Problem
+Solution:
+1) Creates an instance of the slcspParser Class by calling "new slcspP(plansFP, zipsFP,slcspFP);"
+   a) The class creates an object called "slcspData" which holds the current "State" of the application and holds the following information:
+      (1) plansArr - An array of the available healthplans
+      (2) zipsArr - An arrary of zip codes and their RateArea
+      (3) slcspArr - An array of zip codes and SLCSP's for the zip code
+      (4) filteredPlans - Plans list after being filtered
+      (5) filterZips - Zips list after being filtered
+      (6) plansFP - file path to the plans file
+      (7) zipsFP - file path to the zips file
+      (8) slcspFP - file path to the slcsp file
+2) Loads the 3 CSV files into their respective arrays in the object by calling "loadSLCPCSV()"
+3) Processes the slcsp array to look up the SLCSP plans and output the slcsp CSV list with the plans Rate
+   a) It first finds the RateArea by filtering the zipsArr array
+   b) It then finds the rate by filtering plansArr by the plan metal_level and rateArea
+   c) outputs the CSV zipcode, rate
 
-You've been asked to determine the second lowest cost silver plan (SLCSP) for
-a group of ZIP codes.
+I have written the assignment using Javascript and Node.  To run the code follow the below steps:
+1) Install Node - Goto https://nodejs.org/en/download/ and download the appropriate version
+2) Unzip the source code into an empty directory
+3) Open a terminal
+4) Change Directory in to the source code directory
+5) enter 'npm install' (This will install the necessary dependencies)
+6) To run the code enter 'node slcsp.js'
+7) To run the test cases enter 'npm test'
 
-## Task
-
-You've been given a CSV file, `slcsp.csv`, which contains the ZIP codes in the
-first column. Fill in the second column with the rate (see below) of the
-corresponding SLCSP and emit the answer as a CSV on stdout. Write your code in your best programming language.
-
-### Expected output
-
-The order of the rows in your answer as emitted on stdout must stay the same as how they
-appeared in the original `slcsp.csv`. The first row should be the column headers: `zipcode,rate`
-The remaining lines should output unquoted values with two digits after the decimal
-place of the rates, for example: `64148,245.20`.
-
-It may not be possible to determine a SLCSP for every ZIP code given; for example, if there is only one silver plan available, there is no _second_ lowest cost plan. Check for cases where a definitive answer cannot be found and leave those cells blank in the output CSV (no quotes or zeroes or other text). For example, `40813,`.
-
-## Additional information
-
-The SLCSP is the so-called "benchmark" health plan in a particular area. It's
-used to compute the tax credit that qualifying individuals and families receive
-on the marketplace. It's the second lowest rate for a silver plan in the rate area.
-
-For example, if a rate area had silver plans with rates of `[197.3, 197.3, 201.1, 305.4, 306.7, 411.24]`, the SLCSP for that rate area would be `201.1`,
-since it's the second lowest rate in that rate area.
-
-A plan has a "metal level", which can be either Bronze, Silver, Gold, Platinum,
-or Catastrophic. The metal level is indicative of the level of coverage the plan
-provides.
-
-A plan has a "rate", which is the amount that a consumer pays as a monthly
-premium, in dollars.
-
-A plan has a "rate area", which is a geographic region in a state that
-determines the plan's rate. A rate area is a tuple of a state and a number, for
-example, NY 1, IL 14.
-
-There are two additional CSV files in this directory besides `slcsp.csv`:
-
-- `plans.csv` — all the health plans in the U.S. on the marketplace
-- `zips.csv` — a mapping of ZIP code to county/counties & rate area(s)
-
-A ZIP code can potentially be in more than one county. If the county can not be
-determined definitively by the ZIP code, it may still be possible to determine
-the rate area for that ZIP code. A ZIP code can also be in more than one rate area. In that case, the answer is ambiguous
-and should be left blank.
-
-We will want to compile your code from source and run it, so please include the
-complete instructions for doing so in a COMMENTS file.
+Configuration Note:
+1) In the file '.env' specify the locations of the 'plans.csv','slcsp.csv', and 'zips.csv' files.  Right now they are located in the project root.
